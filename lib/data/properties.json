@@ -69,6 +69,119 @@
       "baths": 3,
       "area": 180,
       "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop"
+    },
+    {
+      "id": "n5",
+      "title": "Modern Minimalist House",
+      "location": "Austin, TX",
+      "price": 750000,
+      "type": "FOR SALE",
+      "beds": 3,
+      "baths": 2.5,
+      "area": 150,
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n6",
+      "title": "Luxury Condo",
+      "location": "New York, NY",
+      "price": 1200000,
+      "type": "FOR SALE",
+      "beds": 2,
+      "baths": 2,
+      "area": 110,
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n7",
+      "title": "Cozy Aspen Cottage",
+      "location": "Aspen, CO",
+      "price": 950000,
+      "type": "FOR SALE",
+      "beds": 2,
+      "baths": 1,
+      "area": 90,
+      "image": "https://images.unsplash.com/photo-1472224371017-08207f84aaae?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n8",
+      "title": "Beachfront Villa",
+      "location": "Malibu, CA",
+      "price": 8500,
+      "period": "mo",
+      "type": "FOR RENT",
+      "beds": 4,
+      "baths": 3.5,
+      "area": 300,
+      "image": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n9",
+      "title": "Urban Chicago Apartment",
+      "location": "Chicago, IL",
+      "price": 2500,
+      "period": "mo",
+      "type": "FOR RENT",
+      "beds": 1,
+      "baths": 1,
+      "area": 70,
+      "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n10",
+      "title": "Mountain Lodge",
+      "location": "Lake Tahoe, CA",
+      "price": 1500000,
+      "type": "FOR SALE",
+      "beds": 4,
+      "baths": 3,
+      "area": 250,
+      "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n11",
+      "title": "Desert Oasis",
+      "location": "Scottsdale, AZ",
+      "price": 680000,
+      "type": "FOR SALE",
+      "beds": 3,
+      "baths": 2,
+      "area": 180,
+      "image": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n12",
+      "title": "Historic Townhouse",
+      "location": "Boston, MA",
+      "price": 1100000,
+      "type": "FOR SALE",
+      "beds": 3,
+      "baths": 2.5,
+      "area": 160,
+      "image": "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=2074&auto=format&fit=crop"
+    },
+    {
+      "id": "n13",
+      "title": "Modern SF Studio",
+      "location": "San Francisco, CA",
+      "price": 3000,
+      "period": "mo",
+      "type": "FOR RENT",
+      "beds": 1,
+      "baths": 1,
+      "area": 45,
+      "image": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "id": "n14",
+      "title": "Tropical Bungalow",
+      "location": "Honolulu, HI",
+      "price": 890000,
+      "type": "FOR SALE",
+      "beds": 2,
+      "baths": 2,
+      "area": 130,
+      "image": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=2064&auto=format&fit=crop"
     }
   ]
 }

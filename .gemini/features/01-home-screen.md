@@ -6,3 +6,12 @@ Durante la cosnturcción debes considerar lo siguiente:
 
 ---
 Elimina el modo oscuro, mi proyecto no lo necesita
+
+---
+Analiza el archivo @lib/data/properties.json con el objetivo de crear 12 nuevas propiedades
+
+---
+Sustituye las siguientes direcciones de recursos por direcciones reales que si puedna ser accedidas desde mi navegador:
+- https://images.unsplash.com/photo-1513584684374-8bdb7489feef?q=80&w=2070&auto=format&fit=crop
+- https://images.unsplash.com/photo-1449156001437-3a144f7101bb?q=80&w=2070&auto=format&fit=crop
+- https://images.unsplash.com/photo-1536376074432-bf12177d4f4f?q=80&w=2070&auto=format&fit=crop
