@@ -3,6 +3,7 @@ import PropertyCard from "@/components/PropertyCard";
 import { supabase } from "@/lib/supabase";
 import { Property } from "@/lib/types";
 import Link from "next/link";
+import HomeFilters from "@/components/HomeFilters";
 
 // Server-side fetching functions
 async function getFeaturedProperties() {
@@ -18,13 +19,42 @@ async function getFeaturedProperties() {
   return data as Property[];
 }
 
-async function getNewInMarketProperties(limit: number = 4) {
-  const { data, error, count } = await supabase
+async function getNewInMarketProperties(limit: number = 4, filters: any = {}) {
+  let query = supabase
     .from('properties')
     .select('*', { count: 'exact' })
     .eq('is_featured', false)
-    .order('created_at', { ascending: false })
-    .limit(limit);
+    .order('created_at', { ascending: false });
+
+  if (filters.query) {
+    query = query.or(`title.ilike.%${filters.query}%,location.ilike.%${filters.query}%`);
+  }
+  if (filters.location) {
+    query = query.ilike('location', `%${filters.location}%`);
+  }
+  if (filters.minPrice) {
+    query = query.gte('price', filters.minPrice);
+  }
+  if (filters.maxPrice) {
+    query = query.lte('price', filters.maxPrice);
+  }
+  if (filters.propertyType && filters.propertyType !== 'Any Type') {
+    // Basic mapping for simplicity
+    query = query.ilike('title', `%${filters.propertyType}%`);
+  }
+  if (filters.beds && filters.beds > 0) {
+    query = query.gte('beds', filters.beds);
+  }
+  if (filters.baths && filters.baths > 0) {
+    query = query.gte('baths', filters.baths);
+  }
+  if (filters.amenities) {
+    const amenitiesList = filters.amenities.split(',');
+    // Supabase array filtering
+    query = query.contains('amenities', amenitiesList);
+  }
+
+  const { data, error, count } = await query.limit(limit);
 
   if (error) {
     console.error('Error fetching new properties:', error);
@@ -36,14 +66,24 @@ async function getNewInMarketProperties(limit: number = 4) {
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ limit?: string }>;
+  searchParams: Promise<{ 
+    limit?: string; 
+    query?: string;
+    location?: string;
+    minPrice?: string;
+    maxPrice?: string;
+    propertyType?: string;
+    beds?: string;
+    baths?: string;
+    amenities?: string;
+  }>;
 }) {
   const params = await searchParams;
   const limit = Number(params.limit) || 4;
   const nextLimit = limit + 4;
 
   const featured = await getFeaturedProperties();
-  const { data: newInMarket, count } = await getNewInMarketProperties(limit);
+  const { data: newInMarket, count } = await getNewInMarketProperties(limit, params);
   
   const hasMore = count > limit;
 
@@ -62,34 +102,7 @@ export default async function Home({
               </span>.
             </h1>
             
-            <div className="relative group max-w-2xl mx-auto">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <span className="material-icons text-nordic/40 text-2xl group-focus-within:text-mosque transition-colors">search</span>
-              </div>
-              <input 
-                className="block w-full pl-12 pr-4 py-4 rounded-xl border-none bg-white text-nordic shadow-soft placeholder-nordic/40 focus:ring-2 focus:ring-mosque focus:bg-white transition-all text-lg" 
-                placeholder="Search by city, neighborhood, or address..." 
-                type="text"
-              />
-              <button className="absolute inset-y-2 right-2 px-6 bg-mosque hover:bg-mosque/90 text-white font-medium rounded-lg transition-colors flex items-center justify-center shadow-lg shadow-mosque/20">
-                Search
-              </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 overflow-x-auto hide-scroll py-2 px-4 -mx-4">
-              <button className="whitespace-nowrap px-5 py-2 rounded-full bg-nordic text-white text-sm font-medium shadow-lg shadow-nordic/10 transition-transform hover:-translate-y-0.5">
-                All
-              </button>
-              {['House', 'Apartment', 'Villa', 'Penthouse'].map((cat) => (
-                <button key={cat} className="whitespace-nowrap px-5 py-2 rounded-full bg-white border border-nordic/5 text-nordic/60 hover:text-nordic hover:border-mosque/50 text-sm font-medium transition-all hover:bg-mosque/5">
-                  {cat}
-                </button>
-              ))}
-              <div className="w-px h-6 bg-nordic/10 mx-2"></div>
-              <button className="whitespace-nowrap flex items-center gap-1 px-4 py-2 rounded-full text-nordic font-medium text-sm hover:bg-black/5 transition-colors">
-                <span className="material-icons text-base">tune</span> Filters
-              </button>
-            </div>
+            <HomeFilters />
           </div>
         </section>
 
@@ -169,16 +182,24 @@ export default async function Home({
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {newInMarket.map((prop) => (
-              <PropertyCard key={prop.id} {...prop} />
-            ))}
-          </div>
+          {newInMarket.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {newInMarket.map((prop) => (
+                <PropertyCard key={prop.id} {...prop} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-white rounded-2xl shadow-soft">
+              <span className="material-icons text-nordic/20 text-6xl mb-4">search_off</span>
+              <h3 className="text-xl font-medium text-nordic">No properties found</h3>
+              <p className="text-nordic/60 mt-2">Try adjusting your filters to find what you're looking for.</p>
+            </div>
+          )}
 
           {hasMore && (
             <div className="mt-12 text-center">
               <Link 
-                href={`/?limit=${nextLimit}`} 
+                href={`/?${new URLSearchParams({...params, limit: nextLimit.toString()}).toString()}`} 
                 scroll={false}
                 className="inline-block px-8 py-3 bg-white border border-nordic/10 hover:border-mosque hover:text-mosque text-nordic font-medium rounded-lg transition-all hover:shadow-md"
               >

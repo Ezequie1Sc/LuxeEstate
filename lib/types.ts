@@ -12,5 +12,6 @@ export interface Property {
   type?: string;
   period?: string;
   is_featured: boolean;
+  amenities: string[];
   created_at: string;
 }
