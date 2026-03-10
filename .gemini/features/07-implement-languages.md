@@ -29,3 +29,6 @@ The final result should include:
 - Clear documentation outlining how to update or add translations
 
 This implementation will ensure a seamless multilingual experience for users visiting LUXE ESTATE.
+---
+
+ es importante que te asegures de que todas las etiquetas de la página @app/page.tsx cuenten con una traducción adecuada de acuerdo al idioma seleccionado; tambien debes incluir latraducción de las páginas @app/property/\[slug\]/page.tsx y el archivo searchfilter

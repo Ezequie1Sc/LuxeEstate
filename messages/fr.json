@@ -1,0 +1,85 @@
+{
+  "Common": {
+    "beds": "Chambres",
+    "baths": "Salles de bain",
+    "sqm": "m²",
+    "view_all": "Voir tout",
+    "read_more": "Lire la suite",
+    "premium": "Premium",
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre",
+    "saved": "Enregistrés"
+  },
+  "Navbar": {
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre",
+    "saved": "Enregistrés"
+  },
+  "Hero": {
+    "title_start": "Trouvez votre ",
+    "sanctuary": "sanctuaire",
+    "title_end": ".",
+    "search_placeholder": "Rechercher par ville, quartier ou adresse...",
+    "search_button": "Rechercher"
+  },
+  "Home": {
+    "featured_collections": "Collections en vedette",
+    "featured_subtitle": "Propriétés sélectionnées pour l'œil averti.",
+    "search_results": "Résultats de recherche",
+    "new_in_market": "Nouveau sur le marché",
+    "results_found": "{count} propriétés trouvées correspondant à vos critères.",
+    "new_in_market_subtitle": "Nouvelles opportunités ajoutées cette semaine.",
+    "no_results": "Aucune propriété trouvée",
+    "no_results_subtitle": "Essayez d'ajuster vos filtres pour trouver ce que vous cherchez.",
+    "load_more": "Charger plus de propriétés"
+  },
+  "PropertyDetails": {
+    "view_all_photos": "Voir toutes les photos",
+    "top_rated_agent": "Agent le mieux noté",
+    "schedule_visit": "Planifier une visite",
+    "contact_agent": "Contacter l'agent",
+    "property_features": "Caractéristiques de la propriété",
+    "sqm_full": "Mètres Carrés",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "garage": "Garage",
+    "about_this_home": "À propos de cette maison",
+    "description_p1": "Découvrez le luxe moderne dans cette maison à l'architecture époustouflante située au cœur de {location}. Conçue en mettant l'accent sur la vie intérieure-extérieure, la résidence présente des murs en verre du sol au plafond qui inondent les intérieurs de lumière naturelle.",
+    "description_p2": "La cuisine à aire ouverte est équipée d'appareils haut de gamme et d'armoires sur mesure, parfaites pour les amateurs de cuisine. Retirez-vous dans la suite principale, un sanctuaire de détente avec une baignoire d'inspiration spa et un balcon privé.",
+    "amenities": "Équipements",
+    "estimated_payment": "Paiement estimé",
+    "starting_from": "À partir de {amount}/mois avec {down_payment}% d'acompte",
+    "calculate_mortgage": "Calculer l'hypothèque",
+    "all_rights_reserved": "Tous les droits sont réservés."
+  },
+  "Filters": {
+    "all": "Tous",
+    "house": "Maison",
+    "apartment": "Appartement",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "more_filters": "Filtres",
+    "clear_all": "Effacer les filtres",
+    "show_properties": "Afficher les propriétés",
+    "location": "Emplacement",
+    "price_range": "Fourchette de prix",
+    "min_price": "Prix min",
+    "max_price": "Prix max",
+    "property_type": "Type de propriété",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "amenities": "Équipements et caractéristiques",
+    "any": "Tout",
+    "any_type": "Tout Type"
+  },
+  "Amenities": {
+    "pool": "Piscine",
+    "gym": "Gymnase",
+    "parking": "Parking",
+    "ac": "Climatisation",
+    "wifi": "WiFi",
+    "patio": "Patio"
+  }
+}

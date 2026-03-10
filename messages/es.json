@@ -1,0 +1,85 @@
+{
+  "Common": {
+    "beds": "Hab.",
+    "baths": "Baños",
+    "sqm": "m²",
+    "view_all": "Ver todo",
+    "read_more": "Leer más",
+    "premium": "Premium",
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "sell": "Vender",
+    "saved": "Guardados"
+  },
+  "Navbar": {
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "sell": "Vender",
+    "saved": "Guardados"
+  },
+  "Hero": {
+    "title_start": "Encuentra tu ",
+    "sanctuary": "santuario",
+    "title_end": ".",
+    "search_placeholder": "Busca por ciudad, barrio o dirección...",
+    "search_button": "Buscar"
+  },
+  "Home": {
+    "featured_collections": "Colecciones Destacadas",
+    "featured_subtitle": "Propiedades seleccionadas para el ojo exigente.",
+    "search_results": "Resultados de Búsqueda",
+    "new_in_market": "Nuevas en el Mercado",
+    "results_found": "Se encontraron {count} propiedades que coinciden con tus criterios.",
+    "new_in_market_subtitle": "Nuevas oportunidades añadidas esta semana.",
+    "no_results": "No se encontraron propiedades",
+    "no_results_subtitle": "Intenta ajustar tus filtros para encontrar lo que buscas.",
+    "load_more": "Cargar más propiedades"
+  },
+  "PropertyDetails": {
+    "view_all_photos": "Ver todas las fotos",
+    "top_rated_agent": "Agente destacado",
+    "schedule_visit": "Programar visita",
+    "contact_agent": "Contactar agente",
+    "property_features": "Características de la propiedad",
+    "sqm_full": "Metros Cuadrados",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "garage": "Garaje",
+    "about_this_home": "Sobre esta casa",
+    "description_p1": "Experimente el lujo moderno en esta casa arquitectónicamente impresionante ubicada en el corazón de {location}. Diseñada con énfasis en la vida interior y exterior, la residencia cuenta con paredes de vidrio de piso a techo que inundan los interiores con luz natural.",
+    "description_p2": "La cocina de concepto abierto está equipada con electrodomésticos de primera línea y gabinetes personalizados, perfectos para los entusiastas de la cocina. Retírese a la suite principal, un santuario de relajación con un baño inspirado en un spa y un balcón privado.",
+    "amenities": "Amenidades",
+    "estimated_payment": "Pago Estimado",
+    "starting_from": "Desde {amount}/mes con {down_payment}% de entrada",
+    "calculate_mortgage": "Calcular hipoteca",
+    "all_rights_reserved": "Todos los derechos reservados."
+  },
+  "Filters": {
+    "all": "Todos",
+    "house": "Casa",
+    "apartment": "Apartamento",
+    "villa": "Villa",
+    "penthouse": "Ático",
+    "more_filters": "Filtros",
+    "clear_all": "Borrar filtros",
+    "show_properties": "Mostrar Propiedades",
+    "location": "Ubicación",
+    "price_range": "Rango de Precio",
+    "min_price": "Precio Mín",
+    "max_price": "Precio Máx",
+    "property_type": "Tipo de Propiedad",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "amenities": "Amenidades y Características",
+    "any": "Cualquiera",
+    "any_type": "Cualquier Tipo"
+  },
+  "Amenities": {
+    "pool": "Piscina",
+    "gym": "Gimnasio",
+    "parking": "Parqueo",
+    "ac": "A/C",
+    "wifi": "WiFi",
+    "patio": "Patio"
+  }
+}

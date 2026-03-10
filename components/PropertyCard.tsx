@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface PropertyCardProps {
   id: string;
@@ -26,6 +29,8 @@ export default function PropertyCard({
   type,
   period
 }: PropertyCardProps) {
+  const t = useTranslations('Common');
+  
   const formattedPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -65,13 +70,13 @@ export default function PropertyCard({
           <p className="text-nordic/60 text-xs mb-4">{location}</p>
           <div className="mt-auto flex items-center justify-between pt-3 border-t border-gray-100">
             <div className="flex items-center gap-1 text-nordic/60 text-xs">
-              <span className="material-icons text-sm text-mosque/80">king_bed</span> {beds}
+              <span className="material-icons text-sm text-mosque/80">king_bed</span> {beds} {t('beds')}
             </div>
             <div className="flex items-center gap-1 text-nordic/60 text-xs">
-              <span className="material-icons text-sm text-mosque/80">bathtub</span> {baths}
+              <span className="material-icons text-sm text-mosque/80">bathtub</span> {baths} {t('baths')}
             </div>
             <div className="flex items-center gap-1 text-nordic/60 text-xs">
-              <span className="material-icons text-sm text-mosque/80">square_foot</span> {area}m²
+              <span className="material-icons text-sm text-mosque/80">square_foot</span> {area}{t('sqm')}
             </div>
           </div>
         </div>

@@ -1,29 +1,39 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface FilterModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const AMENITIES_OPTIONS = [
-  { id: 'pool', label: 'Swimming Pool', icon: 'pool' },
-  { id: 'gym', label: 'Gym', icon: 'fitness_center' },
-  { id: 'parking', label: 'Parking', icon: 'local_parking' },
-  { id: 'ac', label: 'Air Conditioning', icon: 'ac_unit' },
-  { id: 'wifi', label: 'High-speed Wifi', icon: 'wifi' },
-  { id: 'patio', label: 'Patio / Terrace', icon: 'deck' },
-];
-
-const PROPERTY_TYPES = ['Any Type', 'House', 'Apartment', 'Villa', 'Penthouse'];
-const SLIDER_MAX = 5000000;
-const STEP = 50000;
-
 export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
+  const t = useTranslations('Filters');
+  const tA = useTranslations('Amenities');
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const AMENITIES_OPTIONS = useMemo(() => [
+    { id: 'pool', label: tA('pool'), icon: 'pool' },
+    { id: 'gym', label: tA('gym'), icon: 'fitness_center' },
+    { id: 'parking', label: tA('parking'), icon: 'local_parking' },
+    { id: 'ac', label: tA('ac'), icon: 'ac_unit' },
+    { id: 'wifi', label: tA('wifi'), icon: 'wifi' },
+    { id: 'patio', label: tA('patio'), icon: 'deck' },
+  ], [tA]);
+
+  const PROPERTY_TYPES = useMemo(() => [
+    { id: 'Any Type', label: t('any_type') },
+    { id: 'House', label: t('house') },
+    { id: 'Apartment', label: t('apartment') },
+    { id: 'Villa', label: t('villa') },
+    { id: 'Penthouse', label: t('penthouse') },
+  ], [t]);
+
+  const SLIDER_MAX = 5000000;
+  const STEP = 50000;
 
   // State initialization with numerical defaults
   const [location, setLocation] = useState('');
@@ -133,7 +143,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
       <main className="relative z-20 w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <header className="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-30">
-          <h1 className="text-2xl font-semibold tracking-tight text-nordic">Filters</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-nordic">{t('more_filters')}</h1>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-500">
             <span className="material-icons">close</span>
           </button>
@@ -144,7 +154,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
           
           {/* Section 1: Location */}
           <section>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Location</label>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">{t('location')}</label>
             <div className="relative group">
               <span className="material-icons absolute left-4 top-3.5 text-gray-400 group-focus-within:text-mosque transition-colors">location_on</span>
               <input 
@@ -152,7 +162,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 bg-clear-day border-0 rounded-lg text-nordic placeholder-gray-400 focus:ring-2 focus:ring-mosque focus:bg-white transition-all shadow-sm font-medium" 
-                placeholder="City, neighborhood, or address" 
+                placeholder={t('location')} 
               />
             </div>
           </section>
@@ -160,7 +170,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
           {/* Section 2: Price Range */}
           <section className="space-y-6">
             <div className="flex justify-between items-end">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Price Range</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('price_range')}</label>
               <span className="text-sm font-medium text-mosque">
                 {formatPriceAbbr(minPrice)} – {maxPrice >= SLIDER_MAX ? `$${(SLIDER_MAX/1000000)}M+` : formatPriceAbbr(maxPrice)}
               </span>
@@ -190,14 +200,14 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
 
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="bg-clear-day p-4 rounded-xl border border-transparent text-center">
-                <label className="block text-[10px] text-gray-500 uppercase font-medium mb-1">Min Price</label>
+                <label className="block text-[10px] text-gray-500 uppercase font-medium mb-1">{t('min_price')}</label>
                 <div className="flex items-center justify-center text-nordic font-bold text-sm">
                   <span className="text-gray-400 mr-1">$</span>
                   <span>{minPrice.toLocaleString()}</span>
                 </div>
               </div>
               <div className="bg-clear-day p-4 rounded-xl border border-transparent text-center">
-                <label className="block text-[10px] text-gray-500 uppercase font-medium mb-1">Max Price</label>
+                <label className="block text-[10px] text-gray-500 uppercase font-medium mb-1">{t('max_price')}</label>
                 <div className="flex items-center justify-center text-nordic font-bold text-sm">
                   <span className="text-gray-400 mr-1">$</span>
                   <span>{maxPrice.toLocaleString()}{maxPrice >= SLIDER_MAX ? '+' : ''}</span>
@@ -210,14 +220,14 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
           <section className="space-y-10 pt-8 border-t border-gray-100">
             {/* Property Type */}
             <div className="space-y-4">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Property Type</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('property_type')}</label>
               <div className="relative">
                 <select 
                   value={propertyType}
                   onChange={(e) => setPropertyType(e.target.value)}
                   className="select-clean w-full bg-clear-day border-0 rounded-lg py-4 pl-4 pr-10 text-nordic focus:ring-2 focus:ring-mosque cursor-pointer font-bold text-sm shadow-sm"
                 >
-                  {PROPERTY_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
+                  {PROPERTY_TYPES.map(type => <option key={type.id} value={type.id}>{type.label}</option>)}
                 </select>
                 <span className="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xl">expand_more</span>
               </div>
@@ -225,7 +235,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
 
             {/* Bedrooms Row */}
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-nordic">Bedrooms</span>
+              <span className="text-sm font-semibold text-nordic">{t('bedrooms')}</span>
               <div className="flex items-center space-x-3 bg-clear-day rounded-full p-1 border border-nordic/5 shadow-inner">
                 <button onClick={() => setBeds(Math.max(0, beds - 1))} className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-mosque active:scale-90 transition-all">
                   <span className="material-icons text-base">remove</span>
@@ -239,7 +249,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
 
             {/* Bathrooms Row */}
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-nordic">Bathrooms</span>
+              <span className="text-sm font-semibold text-nordic">{t('bathrooms')}</span>
               <div className="flex items-center space-x-3 bg-clear-day rounded-full p-1 border border-nordic/5 shadow-inner">
                 <button onClick={() => setBaths(Math.max(0, baths - 1))} className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-mosque active:scale-90 transition-all">
                   <span className="material-icons text-base">remove</span>
@@ -254,7 +264,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
 
           {/* Section 4: Amenities */}
           <section className="pt-4">
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Amenities & Features</label>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">{t('amenities')}</label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {AMENITIES_OPTIONS.map((option) => {
                 const isSelected = selectedAmenities.includes(option.id);
@@ -281,13 +291,13 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
         {/* Footer */}
         <footer className="bg-white border-t border-gray-100 px-8 py-6 sticky bottom-0 z-30 flex items-center justify-between">
           <button onClick={handleClearAll} className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors underline decoration-gray-300 underline-offset-4">
-            Clear all filters
+            {t('clear_all')}
           </button>
           <button 
             onClick={handleApply}
-            className="bg-mosque hover:bg-mosque/90 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-mosque/30 transition-all flex items-center gap-2 transform active:scale-95"
+            className="bg-mosque hover:bg-mosque/90 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-mosque/30 transition-all flex items-center gap-2 transform active:scale-95"
           >
-            Show Properties
+            {t('show_properties')}
             <span className="material-icons text-sm">arrow_forward</span>
           </button>
         </footer>

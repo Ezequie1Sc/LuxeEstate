@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { Property } from "@/lib/types";
 import Link from "next/link";
 import HomeFilters from "@/components/HomeFilters";
+import { getTranslations } from 'next-intl/server';
 
 // Server-side fetching functions
 async function getFeaturedProperties() {
@@ -80,6 +81,12 @@ export default async function Home({
   const limit = Number(params.limit) || 4;
   const nextLimit = limit + 4;
 
+  const tHero = await getTranslations('Hero');
+  const tFilters = await getTranslations('Filters');
+  const tHome = await getTranslations('Home');
+  const tCommon = await getTranslations('Common');
+  const tNavbar = await getTranslations('Navbar');
+
   // Determine if any filter is active (ignoring the pagination limit)
   const isFiltered = Object.keys(params).some(key => 
     key !== 'limit' && params[key as keyof typeof params] !== undefined
@@ -99,10 +106,12 @@ export default async function Home({
         <section className="py-12 md:py-16">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-nordic leading-tight">
-              Find your <span className="relative inline-block">
-                <span className="relative z-10 font-medium">sanctuary</span>
+              {tHero('title_start')}
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium">{tHero('sanctuary')}</span>
                 <span className="absolute bottom-2 left-0 w-full h-3 bg-mosque/20 -rotate-1 z-0"></span>
-              </span>.
+              </span>
+              {tHero('title_end')}
             </h1>
             
             <HomeFilters />
@@ -114,11 +123,11 @@ export default async function Home({
           <section className="mb-16">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <h2 className="text-2xl font-light text-nordic">Featured Collections</h2>
-                <p className="text-nordic/60 mt-1 text-sm">Curated properties for the discerning eye.</p>
+                <h2 className="text-2xl font-light text-nordic">{tHome('featured_collections')}</h2>
+                <p className="text-nordic/60 mt-1 text-sm">{tHome('featured_subtitle')}</p>
               </div>
               <a className="hidden sm:flex items-center gap-1 text-sm font-medium text-mosque hover:opacity-70 transition-opacity" href="#">
-                View all <span className="material-icons text-sm">arrow_forward</span>
+                {tCommon('view_all')} <span className="material-icons text-sm">arrow_forward</span>
               </a>
             </div>
 
@@ -134,7 +143,7 @@ export default async function Home({
                       />
                       {prop.tag && (
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic">
-                          {prop.tag}
+                          {prop.tag === 'Premium' ? tCommon('premium') : prop.tag}
                         </div>
                       )}
                       <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-nordic hover:bg-mosque hover:text-white transition-all">
@@ -156,13 +165,13 @@ export default async function Home({
                       </div>
                       <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic/5">
                         <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                          <span className="material-icons text-lg">king_bed</span> {prop.beds} Beds
+                          <span className="material-icons text-lg">king_bed</span> {prop.beds} {tCommon('beds')}
                         </div>
                         <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                          <span className="material-icons text-lg">bathtub</span> {prop.baths} Baths
+                          <span className="material-icons text-lg">bathtub</span> {prop.baths} {tCommon('baths')}
                         </div>
                         <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                          <span className="material-icons text-lg">square_foot</span> {prop.area} m²
+                          <span className="material-icons text-lg">square_foot</span> {prop.area} {tCommon('sqm')}
                         </div>
                       </div>
                     </div>
@@ -178,16 +187,18 @@ export default async function Home({
           <div className="flex items-end justify-between mb-8">
             <div>
               <h2 className="text-2xl font-light text-nordic">
-                {isFiltered ? 'Search Results' : 'New in Market'}
+                {isFiltered ? tHome('search_results') : tHome('new_in_market')}
               </h2>
               <p className="text-nordic/60 mt-1 text-sm">
-                {isFiltered ? `Found ${count} properties matching your criteria.` : 'Fresh opportunities added this week.'}
+                {isFiltered 
+                  ? tHome('results_found', { count }) 
+                  : tHome('new_in_market_subtitle')}
               </p>
             </div>
             <div className="hidden md:flex bg-white p-1 rounded-lg">
-              <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic text-white shadow-sm">All</button>
-              <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic/60 hover:text-nordic">Buy</button>
-              <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic/60 hover:text-nordic">Rent</button>
+              <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic text-white shadow-sm">{tFilters('all')}</button>
+              <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic/60 hover:text-nordic">{tNavbar('buy')}</button>
+              <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic/60 hover:text-nordic">{tNavbar('rent')}</button>
             </div>
           </div>
           
@@ -200,8 +211,8 @@ export default async function Home({
           ) : (
             <div className="text-center py-20 bg-white rounded-2xl shadow-soft">
               <span className="material-icons text-nordic/20 text-6xl mb-4">search_off</span>
-              <h3 className="text-xl font-medium text-nordic">No properties found</h3>
-              <p className="text-nordic/60 mt-2">Try adjusting your filters to find what you're looking for.</p>
+              <h3 className="text-xl font-medium text-nordic">{tHome('no_results')}</h3>
+              <p className="text-nordic/60 mt-2">{tHome('no_results_subtitle')}</p>
             </div>
           )}
 
@@ -212,7 +223,7 @@ export default async function Home({
                 scroll={false}
                 className="inline-block px-8 py-3 bg-white border border-nordic/10 hover:border-mosque hover:text-mosque text-nordic font-medium rounded-lg transition-all hover:shadow-md"
               >
-                Load more properties
+                {tHome('load_more')}
               </Link>
             </div>
           )}

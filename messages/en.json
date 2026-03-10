@@ -1,0 +1,85 @@
+{
+  "Common": {
+    "beds": "Beds",
+    "baths": "Baths",
+    "sqm": "m²",
+    "view_all": "View all",
+    "read_more": "Read more",
+    "premium": "Premium",
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell",
+    "saved": "Saved Homes"
+  },
+  "Navbar": {
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell",
+    "saved": "Saved Homes"
+  },
+  "Hero": {
+    "title_start": "Find your ",
+    "sanctuary": "sanctuary",
+    "title_end": ".",
+    "search_placeholder": "Search by city, neighborhood, or address...",
+    "search_button": "Search"
+  },
+  "Home": {
+    "featured_collections": "Featured Collections",
+    "featured_subtitle": "Curated properties for the discerning eye.",
+    "search_results": "Search Results",
+    "new_in_market": "New in Market",
+    "results_found": "Found {count} properties matching your criteria.",
+    "new_in_market_subtitle": "Fresh opportunities added this week.",
+    "no_results": "No properties found",
+    "no_results_subtitle": "Try adjusting your filters to find what you're looking for.",
+    "load_more": "Load more properties"
+  },
+  "PropertyDetails": {
+    "view_all_photos": "View All Photos",
+    "top_rated_agent": "Top Rated Agent",
+    "schedule_visit": "Schedule Visit",
+    "contact_agent": "Contact Agent",
+    "property_features": "Property Features",
+    "sqm_full": "Square Meters",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "garage": "Garage",
+    "about_this_home": "About this home",
+    "description_p1": "Experience modern luxury in this architecturally stunning home located in the heart of {location}. Designed with an emphasis on indoor-outdoor living, the residence features floor-to-ceiling glass walls that flood the interiors with natural light.",
+    "description_p2": "The open-concept kitchen is equipped with top-of-the-line appliances and custom cabinetry, perfect for culinary enthusiasts. Retreat to the primary suite, a sanctuary of relaxation with a spa-inspired bath and private balcony.",
+    "amenities": "Amenities",
+    "estimated_payment": "Estimated Payment",
+    "starting_from": "Starting from {amount}/mo with {down_payment}% down",
+    "calculate_mortgage": "Calculate Mortgage",
+    "all_rights_reserved": "All rights reserved."
+  },
+  "Filters": {
+    "all": "All",
+    "house": "House",
+    "apartment": "Apartment",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "more_filters": "Filters",
+    "clear_all": "Clear all filters",
+    "show_properties": "Show Properties",
+    "location": "Location",
+    "price_range": "Price Range",
+    "min_price": "Min Price",
+    "max_price": "Max Price",
+    "property_type": "Property Type",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "amenities": "Amenities & Features",
+    "any": "Any",
+    "any_type": "Any Type"
+  },
+  "Amenities": {
+    "pool": "Pool",
+    "gym": "Gym",
+    "parking": "Parking",
+    "ac": "AC",
+    "wifi": "WiFi",
+    "patio": "Patio"
+  }
+}

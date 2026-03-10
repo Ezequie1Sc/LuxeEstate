@@ -1,6 +1,10 @@
 import Link from "next/link";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslations } from 'next-intl';
 
 export default function Navbar() {
+  const t = useTranslations('Navbar');
+
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-nordic/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,12 +16,13 @@ export default function Navbar() {
             <span className="text-xl font-semibold tracking-tight text-nordic">LuxeEstate</span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <a className="text-mosque font-medium text-sm border-b-2 border-mosque px-1 py-1" href="#">Buy</a>
-            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">Rent</a>
-            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">Sell</a>
-            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">Saved Homes</a>
+            <a className="text-mosque font-medium text-sm border-b-2 border-mosque px-1 py-1" href="#">{t('buy')}</a>
+            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">{t('rent')}</a>
+            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">{t('sell')}</a>
+            <a className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all" href="#">{t('saved')}</a>
           </div>
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
+            <LanguageSelector />
             <button className="text-nordic hover:text-mosque transition-colors">
               <span className="material-icons">search</span>
             </button>
