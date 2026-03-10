@@ -39,8 +39,7 @@ async function getNewInMarketProperties(limit: number = 4, filters: any = {}) {
     query = query.lte('price', filters.maxPrice);
   }
   if (filters.propertyType && filters.propertyType !== 'Any Type') {
-    // Basic mapping for simplicity
-    query = query.ilike('title', `%${filters.propertyType}%`);
+    query = query.eq('category', filters.propertyType);
   }
   if (filters.beds && filters.beds > 0) {
     query = query.gte('beds', filters.beds);
@@ -50,7 +49,6 @@ async function getNewInMarketProperties(limit: number = 4, filters: any = {}) {
   }
   if (filters.amenities) {
     const amenitiesList = filters.amenities.split(',');
-    // Supabase array filtering
     query = query.contains('amenities', amenitiesList);
   }
 
@@ -82,6 +80,11 @@ export default async function Home({
   const limit = Number(params.limit) || 4;
   const nextLimit = limit + 4;
 
+  // Determine if any filter is active (ignoring the pagination limit)
+  const isFiltered = Object.keys(params).some(key => 
+    key !== 'limit' && params[key as keyof typeof params] !== undefined
+  );
+
   const featured = await getFeaturedProperties();
   const { data: newInMarket, count } = await getNewInMarketProperties(limit, params);
   
@@ -106,74 +109,80 @@ export default async function Home({
           </div>
         </section>
 
-        {/* Featured Collections */}
-        <section className="mb-16">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-light text-nordic">Featured Collections</h2>
-              <p className="text-nordic/60 mt-1 text-sm">Curated properties for the discerning eye.</p>
+        {/* Featured Collections - Hidden when filters are applied to focus on search results */}
+        {!isFiltered && featured.length > 0 && (
+          <section className="mb-16">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <h2 className="text-2xl font-light text-nordic">Featured Collections</h2>
+                <p className="text-nordic/60 mt-1 text-sm">Curated properties for the discerning eye.</p>
+              </div>
+              <a className="hidden sm:flex items-center gap-1 text-sm font-medium text-mosque hover:opacity-70 transition-opacity" href="#">
+                View all <span className="material-icons text-sm">arrow_forward</span>
+              </a>
             </div>
-            <a className="hidden sm:flex items-center gap-1 text-sm font-medium text-mosque hover:opacity-70 transition-opacity" href="#">
-              View all <span className="material-icons text-sm">arrow_forward</span>
-            </a>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {featured.map((prop) => (
-              <Link key={prop.id} href={`/property/${prop.slug}`}>
-                <div className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer h-full">
-                  <div className="aspect-[4/3] w-full overflow-hidden relative">
-                    <img 
-                      alt={prop.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                      src={prop.images[0]} 
-                    />
-                    {prop.tag && (
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic">
-                        {prop.tag}
-                      </div>
-                    )}
-                    <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-nordic hover:bg-mosque hover:text-white transition-all">
-                      <span className="material-icons text-xl">favorite_border</span>
-                    </button>
-                    <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                  </div>
-                  <div className="p-6 relative">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="text-xl font-medium text-nordic group-hover:text-mosque transition-colors">{prop.title}</h3>
-                        <p className="text-nordic/60 text-sm flex items-center gap-1 mt-1">
-                          <span className="material-icons text-sm">place</span> {prop.location}
-                        </p>
-                      </div>
-                      <span className="text-xl font-semibold text-mosque">
-                        {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(prop.price)}
-                      </span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {featured.map((prop) => (
+                <Link key={prop.id} href={`/property/${prop.slug}`}>
+                  <div className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer h-full">
+                    <div className="aspect-[4/3] w-full overflow-hidden relative">
+                      <img 
+                        alt={prop.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        src={prop.images[0]} 
+                      />
+                      {prop.tag && (
+                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic">
+                          {prop.tag}
+                        </div>
+                      )}
+                      <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-nordic hover:bg-mosque hover:text-white transition-all">
+                        <span className="material-icons text-xl">favorite_border</span>
+                      </button>
+                      <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
                     </div>
-                    <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic/5">
-                      <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                        <span className="material-icons text-lg">king_bed</span> {prop.beds} Beds
+                    <div className="p-6 relative">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 className="text-xl font-medium text-nordic group-hover:text-mosque transition-colors">{prop.title}</h3>
+                          <p className="text-nordic/60 text-sm flex items-center gap-1 mt-1">
+                            <span className="material-icons text-sm">place</span> {prop.location}
+                          </p>
+                        </div>
+                        <span className="text-xl font-semibold text-mosque">
+                          {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(prop.price)}
+                        </span>
                       </div>
-                      <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                        <span className="material-icons text-lg">bathtub</span> {prop.baths} Baths
-                      </div>
-                      <div className="flex items-center gap-2 text-nordic/60 text-sm">
-                        <span className="material-icons text-lg">square_foot</span> {prop.area} m²
+                      <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic/5">
+                        <div className="flex items-center gap-2 text-nordic/60 text-sm">
+                          <span className="material-icons text-lg">king_bed</span> {prop.beds} Beds
+                        </div>
+                        <div className="flex items-center gap-2 text-nordic/60 text-sm">
+                          <span className="material-icons text-lg">bathtub</span> {prop.baths} Baths
+                        </div>
+                        <div className="flex items-center gap-2 text-nordic/60 text-sm">
+                          <span className="material-icons text-lg">square_foot</span> {prop.area} m²
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
-        {/* New in Market */}
+        {/* Results Section */}
         <section>
           <div className="flex items-end justify-between mb-8">
             <div>
-              <h2 className="text-2xl font-light text-nordic">New in Market</h2>
-              <p className="text-nordic/60 mt-1 text-sm">Fresh opportunities added this week.</p>
+              <h2 className="text-2xl font-light text-nordic">
+                {isFiltered ? 'Search Results' : 'New in Market'}
+              </h2>
+              <p className="text-nordic/60 mt-1 text-sm">
+                {isFiltered ? `Found ${count} properties matching your criteria.` : 'Fresh opportunities added this week.'}
+              </p>
             </div>
             <div className="hidden md:flex bg-white p-1 rounded-lg">
               <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic text-white shadow-sm">All</button>
