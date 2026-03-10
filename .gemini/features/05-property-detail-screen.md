@@ -26,3 +26,26 @@ The outcome I want here is a fully functional PropertyDetailsScreen that include
 - A design that matches the provided guidelines and code
 
 This will ensure that the screen is user-friendly, visually appealing, and compliant with our project standards.
+---
+
+Actualmente en la tabla properties de la base de datos tenemos dos columnas una con el nombre "image" y otra con el nombre "images", necesito que en nuestra aplicación solo se utilice la propiedad "images", es decir el arreglo de iamgenes par aevitar duplicidad y confusion.
+
+- También debes asegurarte que cada propiedad cuente con al menos 3 imagenes que puedan ser accedidas desde internet, evita usar enlaces rotos.
+---
+
+Currently, in the properties table of our database, we have two columns: one named "image" and another named "images." We need to ensure that our application exclusively utilizes the "images" property, which is the array of images, to avoid duplication and confusion. Additionally, it is essential that each property has at least three images accessible from the internet, and we must avoid using broken links.
+
+I want you to update the application to only reference the "images" column instead of "image." 
+
+Please follow these steps:
+1. Identify all instances in the application where the "image" property is currently used.
+2. Replace those instances with the "images" property.
+3. Verify that each property has at least three valid image links that work without any broken links.
+4. Create a report listing any properties that do not meet the image requirement, including their current image links.
+
+The outcome I want here is a clear and concise report that includes:
+- A summary of all changes made to the application
+- A list of properties with fewer than three valid image links, along with their current image URLs
+- Confirmation that the application now exclusively uses the "images" property
+
+This report will help ensure that our application is streamlined and that all properties have sufficient image representations for user access.

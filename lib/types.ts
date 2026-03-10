@@ -1,12 +1,13 @@
 export interface Property {
   id: string;
+  slug: string;
   title: string;
   location: string;
   price: number;
   beds: number;
   baths: number;
   area: number;
-  image: string;
+  images: string[];
   tag?: string;
   type?: string;
   period?: string;
