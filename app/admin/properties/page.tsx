@@ -176,9 +176,12 @@ export default async function AdminPropertiesPage({ searchParams }: PageProps) {
                 </div>
 
                 <div className="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
-                  <button className="p-2 rounded-lg text-gray-400 hover:text-[#006655] hover:bg-[#D9ECC8]/30 transition-all">
+                  <Link 
+                    href={`/admin/properties/${property.id}/edit`}
+                    className="p-2 rounded-lg text-gray-400 hover:text-[#006655] hover:bg-[#D9ECC8]/30 transition-all"
+                  >
                     <span className="material-icons text-xl">edit</span>
-                  </button>
+                  </Link>
                   <button className="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all">
                     <span className="material-icons text-xl">delete_outline</span>
                   </button>

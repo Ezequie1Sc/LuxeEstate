@@ -47,7 +47,10 @@ export default function AdminPropertyFilters() {
             <span className="material-icons text-base">filter_list</span>
             {t('filter')}
           </button>
-          <button className="bg-[#006655] hover:bg-[#005544] text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-[#006655]/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 whitespace-nowrap">
+          <button 
+            onClick={() => router.push('/admin/properties/add')}
+            className="bg-[#006655] hover:bg-[#005544] text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-[#006655]/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 whitespace-nowrap"
+          >
             <span className="material-icons text-base">add</span>
             {t('add_new')}
           </button>

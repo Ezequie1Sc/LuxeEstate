@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Simplified logic: Just check if user is logged in for /admin routes
-  // Role checking is better handled in Server Components/Layouts to avoid middleware overhead
+  // Role checking is better handled in Server Components/Layouts to avoid proxy overhead
   if (request.nextUrl.pathname.startsWith('/admin') && !user) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'

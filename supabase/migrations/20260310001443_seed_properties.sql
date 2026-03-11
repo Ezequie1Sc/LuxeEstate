@@ -1,7 +1,6 @@
 insert into properties (title, location, price, beds, baths, area, image, tag, is_featured) values
 ('The Glass Pavilion', 'Beverly Hills, California', 5250000, 5, 4.5, 4200, 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop', 'Exclusive', true),
 ('Azure Heights Penthouse', 'Downtown, Vancouver', 3800000, 3, 3, 2100, 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop', 'New Arrival', true);
-
 insert into properties (title, location, price, beds, baths, area, image, type, period, is_featured) values
 ('Modern Family Home', '123 Pine St, Seattle', 850000, 3, 2, 120, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop', 'FOR SALE', null, false),
 ('Urban Loft', '456 Elm Ave, Portland', 3200, 1, 1, 85, 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop', 'FOR RENT', 'mo', false),

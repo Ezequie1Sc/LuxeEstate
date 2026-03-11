@@ -32,3 +32,14 @@ The following high-quality, accessible URLs were used to ensure compliance:
 
 ## ✅ Final Confirmation
 The application now **exclusively** uses the `images` property. All dependencies on the single `image` field have been removed, and the database schema is synchronized with the frontend types.
+
+
+## Estructura de curso
+Flujo de trabajo con IA paso a paso
+- Spec-driven development
+
+Crear proyectos profesionaes con IA
+- Desarrollo con agentes, skills, MSP's, reglas y sistemas multi-agente para crear proyectos profesionales
+
+Lnzar un proyecto a producción
+- Testing, securidad y CI/CD

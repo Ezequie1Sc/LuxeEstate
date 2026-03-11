@@ -13,7 +13,6 @@ create table properties (
   is_featured boolean default false,
   created_at timestamp with time zone default now()
 );
-
 -- Add some indexes for search and pagination
 create index idx_properties_is_featured on properties (is_featured);
 create index idx_properties_created_at on properties (created_at desc);

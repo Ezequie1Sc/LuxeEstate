@@ -27,7 +27,6 @@ begin
   return new;
 end;
 $$;
-
 -- Ensure all existing users have a profile (backfill)
 -- This logic will run when the migration is applied
 do $$

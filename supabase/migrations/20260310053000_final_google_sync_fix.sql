@@ -5,7 +5,6 @@ begin
         create type user_role as enum ('Administrador', 'Cliente', 'Vendedor', 'Agente Inmobiliario');
     end if;
 end $$;
-
 -- 2. Función de trigger ultra-segura con manejo de nulos extremo
 create or replace function public.handle_new_user()
 returns trigger
@@ -46,19 +45,17 @@ exception when others then
   return new;
 end;
 $$;
-
 -- 3. Políticas de RLS simplificadas para evitar bloqueos en el inicio de sesión
 drop policy if exists "Users can insert their own profile." on public.profiles;
 drop policy if exists "Users can update own profile." on public.profiles;
-
 create policy "Users can insert their own profile."
   on profiles for insert
-  with check ( true ); -- Permitimos la inserción inicial para que el fallback del servidor funcione siempre
+  with check ( true );
+-- Permitimos la inserción inicial para que el fallback del servidor funcione siempre
 
 create policy "Users can update own profile."
   on profiles for update
   using ( auth.uid() = id );
-
 -- 4. Sincronización Forzada de Emergencia para usuarios de Google existentes
 insert into public.profiles (id, full_name, avatar_url, role)
 select 

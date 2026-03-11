@@ -36,14 +36,12 @@ exception when others then
   return new;
 end;
 $$;
-
 -- 2. Aseguramos que la tabla profiles permita la inserción inicial incluso si RLS es estricto
 -- Permitir inserción anónima temporal solo para el ID propio si el trigger falla
 drop policy if exists "Users can insert their own profile." on public.profiles;
 create policy "Users can insert their own profile."
   on profiles for insert
   with check ( auth.uid() = id );
-
 -- 3. Sincronizar usuarios de Google que ya existen pero no tienen perfil
 insert into public.profiles (id, full_name, avatar_url, role)
 select 

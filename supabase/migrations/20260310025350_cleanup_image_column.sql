@@ -12,6 +12,5 @@ set images = (
     ]
   end
 );
-
 -- 2. Drop the redundant 'image' column
 alter table properties drop column image;

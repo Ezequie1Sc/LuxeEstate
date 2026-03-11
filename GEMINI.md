@@ -1,74 +1,62 @@
 # Luxe Estate - Project Overview
 
-Luxe Estate is a modern web application built with **Next.js 16** and **React 19**. While currently in its initial boilerplate state, the project is structured to leverage the latest web technologies for a high-performance, responsive real estate platform.
+Luxe Estate is a high-performance, responsive real estate platform built with **Next.js 16** and **React 19**, leveraging modern architectural patterns and a premium design aesthetic.
 
 ## 🛠 Tech Stack
 
 - **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
 - **Library:** [React 19](https://react.dev/)
+- **Backend-as-a-Service:** [Supabase](https://supabase.com/) (Auth, Database, Storage)
+- **Internationalization:** [next-intl](https://next-intl-docs.vercel.app/) (Multi-language support)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Maps:** [React Leaflet](https://react-leaflet.js.org/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Linting:** [ESLint](https://eslint.org/)
-- Siempre utiliza context7 para poder validar el uso actual del código que se este sugiriendo
 
-## 🚀 Getting Started
+## 🎨 Design System
 
-### Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) installed (version 18.17 or later recommended).
-
-### Installation
-
-```bash
-npm install
-```
-
-### Development Server
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-### Production Build
-
-To create an optimized production build:
-
-```bash
-npm run build
-```
-
-To start the production server:
-
-```bash
-npm run start
-```
-
-## 📂 Project Structure
-
-- `app/`: Contains the application's routes, layouts, and components (Next.js App Router).
-  - `layout.tsx`: The root layout shared across all pages.
-  - `page.tsx`: The main entry point (Home page).
-  - `globals.css`: Global CSS styles including Tailwind imports.
-- `public/`: Static assets such as images and icons.
-- `next.config.ts`: Configuration for Next.js.
-- `tsconfig.json`: TypeScript configuration.
-- `tailwind.config.mjs` / `postcss.config.mjs`: Tailwind CSS and PostCSS configuration.
+- **Colors:**
+  - `nordic`: #19322F (Deep Forest Green, used for text and primary elements)
+  - `mosque`: #006655 (Vibrant Emerald, used for accents and primary buttons)
+  - `clear-day`: #EEF6F6 (Very Light Teal, used for backgrounds)
+  - `hint-green`: #D9ECC8 (Soft Pistachio, used for highlights)
+- **Typography:**
+  - `Geist` and `Geist Mono` for modern UI elements.
+  - `Newsreader` (serif) for premium display and body text (optional but established in design mocks).
+- **Iconography:**
+  - Google Material Icons / Material Symbols Outlined.
 
 ## 💅 Development Conventions
 
-- **Component Pattern:** Use functional components with React Server Components (RSC) by default. Use `"use client"` only when necessary for interactivity or browser APIs.
-- **Styling:** Utilize utility-first CSS with Tailwind CSS 4.
-- **Typography:** The project uses `Geist` and `Geist Mono` fonts, optimized via `next/font`.
-- **Linting:** Follow the standard Next.js ESLint configuration. Run `npm run lint` to check for issues.
-- **Naming:** Use PascalCase for components and camelCase for functions and variables.
+- **Component Pattern:** Functional components with React Server Components (RSC) by default. Use `"use client"` only for interactivity, state, or browser-side libraries (like Leaflet).
+- **Next.js 16 Conventions:** Use `proxy.ts` instead of `middleware.ts` for network-level logic (e.g., auth session updates).
+- **Supabase Patterns:**
+  - Use `createClient` from `@/utils/supabase/` (server, client, or proxy variants).
+  - Centralized type definitions in `lib/types.ts`.
+- **Styling:** Utility-first CSS with Tailwind 4. Standardize shadows for a "premium" lifted feel.
+- **Internalization:** Use `useTranslations` from `next-intl` for all user-facing text. Messages are stored in `messages/*.json`.
+- **Validation:** Always use the `context7` MCP server to validate code usage and library-specific best practices.
 
-## 📝 TODO
+## 📂 Key Project Structure
 
-- [ ] Define core real estate entities (Properties, Agents, Users).
-- [ ] Implement property search and filtering.
-- [ ] Design and build responsive UI components (Navbar, Footer, Property Cards).
-- [ ] Integrate a database/backend for property listings.
+- `app/`: Next.js App Router (Routes, Layouts).
+  - `admin/`: Administrative dashboard for properties and users.
+  - `property/`: Public property detail pages with dynamic slugs.
+- `components/`: Reusable UI components (Navbar, PropertyCard, PropertyForm, FilterModal, etc.).
+- `lib/`: Domain-specific logic, constants, and shared types (`types.ts`).
+- `messages/`: Translation files (en.json, es.json, fr.json).
+- `supabase/`: Local Supabase migrations and configuration.
+- `utils/`: Utility functions and Supabase client factory logic.
+- `proxy.ts`: Next.js 16 proxy implementation (auth sync).
+
+## 📝 Current Progress & Roadmap
+
+- [x] Configure Supabase Database & Auth (Google Login).
+- [x] Implement Home Screen with Property Listing.
+- [x] Implement Multi-language Support (EN, ES, FR).
+- [x] Build Admin Properties Dashboard.
+- [x] Build Add/Edit Property Form with image upload and map preview.
+- [ ] Implement Advanced Search & Filters across all views.
+- [ ] Implement Admin User Management Directory.
+- [ ] Implement Property detail screen.
+- [ ] Integrate Real-time Notifications for property inquiries.

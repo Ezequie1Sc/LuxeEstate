@@ -15,5 +15,8 @@ export interface Property {
   amenities: string[];
   created_at: string;
   status: 'Active' | 'Pending' | 'Sold';
-  category: 'House' | 'Apartment' | 'Villa' | 'Penthouse';
+  category: 'House' | 'Apartment' | 'Villa' | 'Penthouse' | 'Commercial';
+  description?: string;
+  year_built?: number;
+  parking?: number;
 }
