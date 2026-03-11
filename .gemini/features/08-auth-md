@@ -1,6 +1,3 @@
-### Crear un proyecto de google para autenticarnos
-
----
 ### Configurar el Signin provider de supabase
 En la sección de Authentication, selecciona la opcion Sign In / Providers y debes buscar el proveedro GitHub para obtener la URL Callback que se va a configurar en el siguiente paso
 
@@ -12,6 +9,18 @@ En la sección de Authentication, selecciona la opcion Sign In / Providers y deb
 - Selecciona la opción NewOAuth
 --- 
 
+### Configurar el Signin provider de supabase
+En la sección de Authentication, selecciona la opcion Sign In / Providers y debes buscar el proveedro Google para obtener la URL Callback que se va a configurar en el siguiente paso
+---
+
+### Crear un proyecto de google para autenticarnos
+- ingresa a la consola de google y crea un nuevo proyecto con el nombre luxe-estate-[iniciales]
+- Seleccionar la opción "APIs y servicios"
+- Selecciona la opción Credenciales
+- En el menú "Create Credentials" selecciona la opción "OAuth client ID"
+- Configura tu pantalla de consentimiento si es la primera vez que accedes
+
+---
 vamos a crear el diseño de nuestra funcionalidad de inicio de sesión basada en el diseño que puedes analizar en la imagen @.gemini/resources/social_login_and_registration/screen.png y utilizar el código del archivo @.gemini/resources/social_login_and_registration/code.html como base para implementar el código final del feature, reqcuerda que siempre debes validar el uso de los componentes y código generado utilizando el mcp context7.
 
 - Para el icono de la aplicaciónen en la pantalla de autenticación puedes utilizar el mismo icono que se esta utilizando en el navbar de la pantalla de HomeScreen
