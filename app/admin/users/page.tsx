@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import UserMenu from '@/components/UserMenu'
+import AdminNavbar from '@/components/AdminNavbar'
 
 export const dynamic = 'force-dynamic' // Force dynamic rendering to avoid stale cache
 
@@ -48,34 +49,7 @@ export default async function AdminUsersPage() {
 
   return (
     <div className="bg-[#EEF6F6] text-[#19322F] font-display min-h-screen flex flex-col antialiased">
-      <nav className="bg-white border-b border-[#19322F]/5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
-          <div className="flex items-center gap-12">
-            <div className="flex-shrink-0 flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#006655] text-2xl">apartment</span>
-              <span className="font-bold text-lg text-[#19322F] tracking-tight">LuxeEstate</span>
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a className="text-[#19322F]/60 hover:text-[#006655] px-1 py-2 text-sm font-medium transition-colors" href="#">Dashboard</a>
-              <a className="text-[#19322F]/60 hover:text-[#006655] px-1 py-2 text-sm font-medium transition-colors" href="#">Listings</a>
-              <a className="text-[#006655] border-b-2 border-[#006655] px-1 py-2 text-sm font-medium" href="#">Users</a>
-              <a className="text-[#19322F]/60 hover:text-[#006655] px-1 py-2 text-sm font-medium transition-colors" href="#">Inquiries</a>
-            </div>
-          </div>
-          <div className="flex items-center gap-5">
-            <button className="text-[#19322F]/60 hover:text-[#006655] transition-colors">
-              <span className="material-symbols-outlined text-xl">search</span>
-            </button>
-            <button className="text-[#19322F]/60 hover:text-[#006655] transition-colors relative">
-              <span className="material-symbols-outlined text-xl">notifications</span>
-              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
-            </button>
-            <div className="pl-2 border-l border-[#19322F]/10 ml-2">
-              <UserMenu user={user} />
-            </div>
-          </div>
-        </div>
-      </nav>
+      <AdminNavbar user={user} activeTab="users" />
 
       <header className="w-full pt-8 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 interface FilterModalProps {
@@ -14,6 +14,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
   const tA = useTranslations('Amenities');
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const AMENITIES_OPTIONS = useMemo(() => [
     { id: 'pool', label: tA('pool'), icon: 'pool' },
@@ -81,8 +82,8 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
     if (baths > 0) params.set('baths', baths.toString()); else params.delete('baths');
     if (selectedAmenities.length > 0) params.set('amenities', selectedAmenities.join(',')); else params.delete('amenities');
     
-    params.delete('limit');
-    router.push(`/?${params.toString()}`, { scroll: false });
+    params.delete('page');
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
     onClose();
   };
 

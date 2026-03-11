@@ -81,5 +81,27 @@
     "ac": "Climatisation",
     "wifi": "WiFi",
     "patio": "Patio"
+  },
+  "Admin": {
+    "properties": {
+      "title": "Mes Propriétés",
+      "subtitle": "Gérez votre portefeuille et suivez vos performances.",
+      "add_new": "Ajouter une nouvelle propriété",
+      "filter": "Filtrer",
+      "total_listings": "Total des inscriptions",
+      "active_properties": "Propriétés actives",
+      "pending_sale": "Vente en attente",
+      "table_details": "Détails de la propriété",
+      "table_price": "Prix",
+      "table_status": "Statut",
+      "table_actions": "Actions",
+      "monthly": "Mensuel",
+      "sold_on": "Vendu",
+      "sqft": "m²",
+      "showing": "Affichage de",
+      "to": "à",
+      "of": "sur",
+      "results": "résultats"
+    }
   }
 }

@@ -81,5 +81,27 @@
     "ac": "AC",
     "wifi": "WiFi",
     "patio": "Patio"
+  },
+  "Admin": {
+    "properties": {
+      "title": "My Properties",
+      "subtitle": "Manage your portfolio and track performance.",
+      "add_new": "Add New Property",
+      "filter": "Filter",
+      "total_listings": "Total Listings",
+      "active_properties": "Active Properties",
+      "pending_sale": "Pending Sale",
+      "table_details": "Property Details",
+      "table_price": "Price",
+      "table_status": "Status",
+      "table_actions": "Actions",
+      "monthly": "Monthly",
+      "sold_on": "Sold",
+      "sqft": "sqft",
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "results": "results"
+    }
   }
 }

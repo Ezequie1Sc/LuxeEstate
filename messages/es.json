@@ -81,5 +81,27 @@
     "ac": "A/C",
     "wifi": "WiFi",
     "patio": "Patio"
+  },
+  "Admin": {
+    "properties": {
+      "title": "Mis Propiedades",
+      "subtitle": "Gestione su cartera y realice un seguimiento del rendimiento.",
+      "add_new": "Añadir Nueva Propiedad",
+      "filter": "Filtrar",
+      "total_listings": "Listados Totales",
+      "active_properties": "Propiedades Activas",
+      "pending_sale": "Venta Pendiente",
+      "table_details": "Detalles de la Propiedad",
+      "table_price": "Precio",
+      "table_status": "Estado",
+      "table_actions": "Acciones",
+      "monthly": "Mensual",
+      "sold_on": "Vendido",
+      "sqft": "m²",
+      "showing": "Mostrando",
+      "to": "a",
+      "of": "de",
+      "results": "resultados"
+    }
   }
 }

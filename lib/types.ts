@@ -14,4 +14,6 @@ export interface Property {
   is_featured: boolean;
   amenities: string[];
   created_at: string;
+  status: 'Active' | 'Pending' | 'Sold';
+  category: 'House' | 'Apartment' | 'Villa' | 'Penthouse';
 }
