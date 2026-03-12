@@ -6,6 +6,7 @@ import { createClient } from '@/utils/supabase/client';
 import { Property } from '@/lib/types';
 import Image from 'next/image';
 import PropertyMap from './PropertyMap';
+import ImageUpload from './ImageUpload';
 
 interface PropertyFormProps {
   initialData?: Partial<Property>;
@@ -16,7 +17,6 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
   const router = useRouter();
   const supabase = createClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState<string[]>(initialData?.images || []);
 
   const [formData, setFormData] = useState({
@@ -59,42 +59,6 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
         ? prev.amenities.filter(a => a !== amenity)
         : [...prev.amenities, amenity]
     }));
-  };
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
-    
-    setUploading(true);
-    const files = Array.from(e.target.files);
-    const newImageUrls: string[] = [];
-
-    for (const file of files) {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `property-images/${fileName}`;
-
-      const { data, error } = await supabase.storage
-        .from('properties')
-        .upload(filePath, file);
-
-      if (error) {
-        console.error('Error uploading image:', error.message);
-        continue;
-      }
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('properties')
-        .getPublicUrl(filePath);
-
-      newImageUrls.push(publicUrl);
-    }
-
-    setImages(prev => [...prev, ...newImageUrls]);
-    setUploading(false);
-  };
-
-  const removeImage = (index: number) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
   };
 
   const generateSlug = (text: string) => {
@@ -266,44 +230,10 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
             </div>
           </div>
           <div className="p-8">
-            <div className="relative border-2 border-dashed border-gray-300 rounded-xl bg-gray-50/50 p-10 text-center hover:bg-[#D9ECC8]/10 hover:border-[#006655]/40 transition-colors cursor-pointer group">
-              <input 
-                type="file" 
-                multiple 
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
-              />
-              <div className="flex flex-col items-center justify-center space-y-3">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-[#006655]">
-                  <span className="material-icons text-2xl">{uploading ? 'sync' : 'cloud_upload'}</span>
-                </div>
-                <div>
-                  <p className="text-base font-medium text-[#19322F]">Click or drag images here</p>
-                  <p className="text-xs text-gray-400">Max file size 5MB per image</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-              {images.map((url, index) => (
-                <div key={index} className="aspect-square rounded-lg overflow-hidden relative group shadow-sm">
-                  <Image src={url} alt={`Property ${index}`} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-[#19322F]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                    <button 
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      className="w-8 h-8 rounded-full bg-white text-red-500 hover:bg-red-50 flex items-center justify-center transition-colors"
-                    >
-                      <span className="material-icons text-sm">delete</span>
-                    </button>
-                  </div>
-                  {index === 0 && (
-                    <span className="absolute top-2 left-2 bg-[#006655] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Main</span>
-                  )}
-                </div>
-              ))}
-            </div>
+            <ImageUpload 
+              existingImages={images} 
+              onUploadComplete={(urls) => setImages(urls)} 
+            />
           </div>
         </div>
       </div>
