@@ -6,8 +6,10 @@ import PropertyDetailsMap from "@/components/PropertyDetailsMap";
 import { getTranslations } from 'next-intl/server';
 import Image from "next/image";
 
+export const dynamic = 'force-dynamic'
+
 async function getPropertyBySlug(slug: string) {
-  const supabase = await createClient();
+...
   const { data, error } = await supabase
     .from('properties')
     .select('*')
