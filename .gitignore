@@ -12,13 +12,20 @@
 
 # testing
 /coverage
-
 # next.js
 /.next/
 /out/
 
 # production
 /build
+
+...
+
+# Agent & AI config
+.agents/
+.gemini/
+.env
+.env*.local
 
 # misc
 .DS_Store
