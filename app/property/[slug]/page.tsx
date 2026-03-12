@@ -9,7 +9,7 @@ import Image from "next/image";
 export const dynamic = 'force-dynamic'
 
 async function getPropertyBySlug(slug: string) {
-...
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from('properties')
     .select('*')
@@ -175,7 +175,7 @@ export default async function PropertyDetailsPage({
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-[#006655]/5 rounded-lg border border-[#006655]/10">
                   <span className="material-icons text-[#006655] text-2xl mb-2">directions_car</span>
-                  <span className="text-xl font-bold text-[#19322F]">2</span>
+                  <span className="text-xl font-bold text-[#19322F]">{property.parking || 2}</span>
                   <span className="text-xs uppercase tracking-wider text-[#19322F]/50">{t('garage')}</span>
                 </div>
               </div>
@@ -185,11 +185,9 @@ export default async function PropertyDetailsPage({
               <h2 className="text-lg font-semibold mb-4 text-[#19322F]">{t('about_this_home')}</h2>
               <div className="prose prose-slate max-w-none text-[#19322F]/70 leading-relaxed">
                 <p className="mb-4">
-                  {t('description_p1', { location: property.location })}
+                  {property.description || t('description_p1', { location: property.location })}
                 </p>
-                <p>
-                  {t('description_p2')}
-                </p>
+                {!property.description && <p>{t('description_p2')}</p>}
               </div>
               <button className="mt-4 text-[#006655] font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                 {tCommon('read_more')}
