@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import UserMenu from './UserMenu'
+import { User } from '@supabase/supabase-js'
 
 interface AdminNavbarProps {
-  user: any
+  user: User | null
   activeTab: 'dashboard' | 'listings' | 'users' | 'inquiries'
 }
 

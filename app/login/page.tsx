@@ -1,11 +1,9 @@
 'use client'
 
 import { createClient } from '@/utils/supabase/client'
-import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   const supabase = createClient()
-  const router = useRouter()
 
   const handleLogin = async (provider: 'google' | 'github') => {
     await supabase.auth.signInWithOAuth({
@@ -61,7 +59,7 @@ export default function LoginPage() {
             </button>
           </div>
           <p className="mt-8 text-center text-sm text-[#19322F]/70 dark:text-gray-400">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <a className="font-semibold text-[#006655] hover:text-[#004d40] transition-colors" href="#">
               Sign up
             </a>

@@ -32,9 +32,9 @@ export async function GET(request: Request) {
         })
       } else {
         // Only update if current fields are missing
-        const updates: any = {}
+        const updates: Record<string, string> = {}
         if (!profile.full_name) updates.full_name = fullName
-        if (!profile.avatar_url) updates.avatar_url = avatarUrl
+        if (!profile.avatar_url) updates.avatar_url = avatarUrl || ''
         
         if (Object.keys(updates).length > 0) {
           await supabase.from('profiles').update(updates).eq('id', user.id)

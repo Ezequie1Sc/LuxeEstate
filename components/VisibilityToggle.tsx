@@ -52,9 +52,10 @@ export default function VisibilityToggle({
 
       // Refresh the server component data
       router.refresh();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       toast.error('Failed to update visibility', {
-        description: error.message,
+        description: errorMessage,
       });
     } finally {
       setIsLoading(false);

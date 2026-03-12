@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import { Property } from '@/lib/types';
-import Image from 'next/image';
 import PropertyMap from './PropertyMap';
 import ImageUpload from './ImageUpload';
 
@@ -13,13 +12,32 @@ interface PropertyFormProps {
   isEdit?: boolean;
 }
 
+type PropertyFormData = {
+  title: string;
+  location: string;
+  price: number;
+  beds: number;
+  baths: number;
+  area: number;
+  category: Property['category'];
+  status: Property['status'];
+  type: string;
+  period: string;
+  description: string;
+  year_built: number;
+  parking: number;
+  amenities: string[];
+  is_featured: boolean;
+  tag: string;
+};
+
 export default function PropertyForm({ initialData, isEdit = false }: PropertyFormProps) {
   const router = useRouter();
   const supabase = createClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [images, setImages] = useState<string[]>(initialData?.images || []);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PropertyFormData>({
     title: initialData?.title || '',
     location: initialData?.location || '',
     price: initialData?.price || 0,
@@ -44,7 +62,7 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
     'Private Gym', 'Wine Cellar'
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value, type } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -68,7 +86,7 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
       .replace(/ +/g, '-');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -96,11 +114,21 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
 
       router.push('/admin/properties');
       router.refresh();
-    } catch (error: any) {
-      alert('Error saving property: ' + error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert('Error saving property: ' + errorMessage);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  type FormNumericField = 'beds' | 'baths' | 'parking';
+
+  const updateNumericField = (field: FormNumericField, delta: number) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: Math.max(0, (prev[field] as number) + delta)
+    }));
   };
 
   return (
@@ -312,9 +340,9 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
 
             <div className="space-y-4">
               {[
-                { label: 'Bedrooms', id: 'beds', icon: 'bed' },
-                { label: 'Bathrooms', id: 'baths', icon: 'bathtub' },
-                { label: 'Parking', id: 'parking', icon: 'directions_car' },
+                { label: 'Bedrooms', id: 'beds' as const, icon: 'bed' },
+                { label: 'Bathrooms', id: 'baths' as const, icon: 'bathtub' },
+                { label: 'Parking', id: 'parking' as const, icon: 'directions_car' },
               ].map((item) => (
                 <div key={item.id} className="flex items-center justify-between">
                   <label className="text-sm font-medium text-[#19322F] flex items-center gap-2">
@@ -323,18 +351,18 @@ export default function PropertyForm({ initialData, isEdit = false }: PropertyFo
                   <div className="flex items-center border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
                     <button 
                       type="button"
-                      onClick={() => setFormData(prev => ({ ...prev, [item.id]: Math.max(0, (prev as any)[item.id] - 1) }))}
+                      onClick={() => updateNumericField(item.id, -1)}
                       className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 border-r border-gray-100"
                     >-</button>
                     <input 
                       type="text" 
                       readOnly
-                      value={(formData as any)[item.id]}
+                      value={formData[item.id]}
                       className="w-10 text-center border-none bg-transparent text-[#19322F] p-0 focus:ring-0 text-sm font-medium"
                     />
                     <button 
                       type="button"
-                      onClick={() => setFormData(prev => ({ ...prev, [item.id]: (prev as any)[item.id] + 1 }))}
+                      onClick={() => updateNumericField(item.id, 1)}
                       className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 border-l border-gray-100"
                     >+</button>
                   </div>

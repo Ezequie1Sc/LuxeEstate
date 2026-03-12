@@ -5,6 +5,7 @@ import { Property } from "@/lib/types";
 import Link from "next/link";
 import HomeFilters from "@/components/HomeFilters";
 import { getTranslations } from 'next-intl/server';
+import Image from "next/image";
 
 // Server-side fetching functions
 async function getFeaturedProperties() {
@@ -21,7 +22,7 @@ async function getFeaturedProperties() {
   return data as Property[];
 }
 
-async function getNewInMarketProperties(limit: number = 4, filters: any = {}) {
+async function getNewInMarketProperties(limit: number = 4, filters: Record<string, string | undefined> = {}) {
   let query = supabase
     .from('properties')
     .select('*', { count: 'exact' })
@@ -44,10 +45,10 @@ async function getNewInMarketProperties(limit: number = 4, filters: any = {}) {
   if (filters.propertyType && filters.propertyType !== 'Any Type') {
     query = query.eq('category', filters.propertyType);
   }
-  if (filters.beds && filters.beds > 0) {
+  if (filters.beds && Number(filters.beds) > 0) {
     query = query.gte('beds', filters.beds);
   }
-  if (filters.baths && filters.baths > 0) {
+  if (filters.baths && Number(filters.baths) > 0) {
     query = query.gte('baths', filters.baths);
   }
   if (filters.amenities) {
@@ -138,10 +139,11 @@ export default async function Home({
                 <Link key={prop.id} href={`/property/${prop.slug}`}>
                   <div className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer h-full">
                     <div className="aspect-[4/3] w-full overflow-hidden relative">
-                      <img 
+                      <Image 
                         alt={prop.title} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                         src={prop.images[0]} 
+                        fill
                       />
                       {prop.tag && (
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic">

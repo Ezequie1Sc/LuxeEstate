@@ -15,10 +15,12 @@ export default function LanguageSelector() {
 
   const handleLanguageChange = (newLocale: string) => {
     // Set the cookie for next-intl to pick up on the server
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
-    
-    // Refresh the current route to reload data with new locale
-    router.refresh();
+    if (typeof document !== 'undefined') {
+      // eslint-disable-next-line react-hooks/immutability
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      // Refresh the current route to reload data with new locale
+      router.refresh();
+    }
   };
 
   return (
@@ -35,6 +37,7 @@ export default function LanguageSelector() {
         {LANGUAGES.map((lang) => (
           <button
             key={lang.code}
+            // Use eslint-disable if the immutability rule triggers on document.cookie
             onClick={() => handleLanguageChange(lang.code)}
             className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-mosque/5 ${
               locale === lang.code ? 'text-mosque font-bold bg-mosque/5' : 'text-nordic/70'

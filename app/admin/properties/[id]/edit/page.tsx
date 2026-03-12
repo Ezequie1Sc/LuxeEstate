@@ -46,7 +46,7 @@ export default async function EditPropertyPage({ params }: PageProps) {
             </nav>
             <h1 className="text-3xl md:text-4xl font-bold text-[#19322F] tracking-tight mb-2">Edit Property</h1>
             <p className="text-base text-gray-500 max-w-2xl font-normal">
-              Update the details for "{property.title}".
+              Update the details for &quot;{property.title}&quot;.
             </p>
           </div>
         </header>

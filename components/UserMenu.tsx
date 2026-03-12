@@ -17,11 +17,11 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { cn } from '@/lib/utils'
+import { User } from '@supabase/supabase-js'
 
 const ADMIN_ROLES = ['Administrador', 'Vendedor', 'Agente Inmobiliario'];
 
-export default function UserMenu({ user }: { user: any }) {
+export default function UserMenu({ user }: { user: User | null }) {
   const [profile, setProfile] = useState<{ role: string | null, avatar_url: string | null, full_name: string | null }>({
     role: null,
     avatar_url: null,
@@ -68,8 +68,8 @@ export default function UserMenu({ user }: { user: any }) {
   }
 
   // Priority: 1. Profiles Table, 2. User Metadata Fallbacks
-  const avatarUrl = profile.avatar_url || user?.user_metadata?.avatar_url || user?.user_metadata?.picture || user?.user_metadata?.image;
-  const displayName = profile.full_name || user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email;
+  const avatarUrl = profile.avatar_url || user.user_metadata?.avatar_url || user.user_metadata?.picture || user.user_metadata?.image;
+  const displayName = profile.full_name || user.user_metadata?.full_name || user.user_metadata?.name || user.email;
   const isAdmin = profile.role && ADMIN_ROLES.includes(profile.role);
 
   return (

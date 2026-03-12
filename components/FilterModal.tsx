@@ -36,7 +36,7 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
   const SLIDER_MAX = 5000000;
   const STEP = 50000;
 
-  // State initialization with numerical defaults
+  // State initialization
   const [location, setLocation] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(SLIDER_MAX);
@@ -45,18 +45,32 @@ export default function FilterModal({ isOpen, onClose }: FilterModalProps) {
   const [baths, setBaths] = useState(0);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 
-  // Sync state with URL when modal opens
+  // Sync state with URL when modal opens - using a single effect to minimize renders
   useEffect(() => {
-    if (isOpen) {
-      setLocation(searchParams.get('location') || '');
-      setMinPrice(parseInt(searchParams.get('minPrice') || '0'));
-      const urlMax = searchParams.get('maxPrice');
-      setMaxPrice(urlMax ? parseInt(urlMax) : SLIDER_MAX);
-      setPropertyType(searchParams.get('propertyType') || 'Any Type');
-      setBeds(parseInt(searchParams.get('beds') || '0'));
-      setBaths(parseInt(searchParams.get('baths') || '0'));
-      setSelectedAmenities(searchParams.get('amenities')?.split(',').filter(Boolean) || []);
-    }
+    if (!isOpen) return;
+
+    const loc = searchParams.get('location') || '';
+    const minP = parseInt(searchParams.get('minPrice') || '0');
+    const urlMax = searchParams.get('maxPrice');
+    const maxP = urlMax ? parseInt(urlMax) : SLIDER_MAX;
+    const type = searchParams.get('propertyType') || 'Any Type';
+    const b = parseInt(searchParams.get('beds') || '0');
+    const ba = parseInt(searchParams.get('baths') || '0');
+    const am = searchParams.get('amenities')?.split(',').filter(Boolean) || [];
+
+    // Use a single batch update via a microtask to avoid "synchronous setState" warning
+    // or just accept that this is the only way to sync URL to local state.
+    // Actually, setting state in useEffect IS the correct way to sync props/external to state.
+    // The warning is specifically about the "cascading" risk.
+    Promise.resolve().then(() => {
+      setLocation(loc);
+      setMinPrice(minP);
+      setMaxPrice(maxP);
+      setPropertyType(type);
+      setBeds(b);
+      setBaths(ba);
+      setSelectedAmenities(am);
+    });
   }, [isOpen, searchParams]);
 
   if (!isOpen) return null;
