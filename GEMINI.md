@@ -2,7 +2,8 @@
 
 Luxe Estate is a high-performance, responsive real estate platform built with **Next.js 16** and **React 19**, leveraging modern architectural patterns and a premium design aesthetic.
 
-siempre debes utilizar skill-router para validar cuales son las mejores skill para ayudarnos en la tarea que se solicite.
+> [!IMPORTANT]
+> Siempre debes utilizar **`skill-router`** para validar cuáles son las mejores habilidades (skills) para ayudarnos en la tarea que se solicite.
 
 ## 🛠 Tech Stack
 
@@ -17,39 +18,92 @@ siempre debes utilizar skill-router para validar cuales son las mejores skill pa
 
 ## 🎨 Design System
 
-- **Colors:**
-  - `nordic`: #19322F (Deep Forest Green, used for text and primary elements)
-  - `mosque`: #006655 (Vibrant Emerald, used for accents and primary buttons)
-  - `clear-day`: #EEF6F6 (Very Light Teal, used for backgrounds)
-  - `hint-green`: #D9ECC8 (Soft Pistachio, used for highlights)
-- **Typography:**
-  - `Geist` and `Geist Mono` for modern UI elements.
-  - `Newsreader` (serif) for premium display and body text (optional but established in design mocks).
-- **Iconography:**
-  - Google Material Icons / Material Symbols Outlined.
+### Paleta de Colores
+Debes usar exactamente estos valores para mantener la consistencia visual:
+
+- **Nordic (#19322F):** Color principal oscuro. Usado en Headers, navegación y texto principal.
+- **Mosque (#006655):** Color primario de acción. Usado en botones primarios y acentos interactivos.
+- **Clear Day (#EEF6F6):** Fondo general de la aplicación.
+- **Hint of Green (#D9ECC8):** Fondo suave usado en tarjetas destacadas y highlights.
+
+### Tipografía
+- **SF Pro Display:** Uso obligatorio para todos los elementos de la interfaz.
+
+### Iconografía
+- Google Material Icons / Material Symbols Outlined.
 
 ## 💅 Development Conventions
 
-- **Component Pattern:** Functional components with React Server Components (RSC) by default. Use `"use client"` only for interactivity, state, or browser-side libraries (like Leaflet).
-- **Next.js 16 Conventions:** Use `proxy.ts` instead of `middleware.ts` for network-level logic (e.g., auth session updates).
-- **Supabase Patterns:**
-  - Use `createClient` from `@/utils/supabase/` (server, client, or proxy variants).
-  - Centralized type definitions in `lib/types.ts`.
-- **Styling:** Utility-first CSS with Tailwind 4. Standardize shadows for a "premium" lifted feel.
-- **Internalization:** Use `useTranslations` from `next-intl` for all user-facing text. Messages are stored in `messages/*.json`.
-- **Validation:** Always use the `context7` MCP server to validate code usage and library-specific best practices.
+### Principios de Desarrollo
+- **Reutilización:** Prioriza siempre la creación de componentes reutilizables para elementos recurrentes (tarjetas, inputs, botones).
+- **Framework UI:** Prioriza el uso de componentes de **shadcn/ui**.
+- **Arquitectura:** Organización **Feature First** utilizando la metodología **Feature Driven Development (FDD)**.
+- **Validación:** Antes de instalar cualquier librería o realizar configuraciones mayores, consulta primero.
+
+### Patrones de Código
+- **Componentes:** Componentes funcionales con React Server Components (RSC) por defecto. Usa `"use client"` solo cuando sea estrictamente necesario para interactividad.
+- **Next.js 16:** Uso de `proxy.ts` en lugar de `middleware.ts` para lógica a nivel de red (ej. actualizaciones de sesión de auth).
+- **Supabase:** Usa `createClient` desde `@/utils/supabase/`. Definiciones de tipos centralizadas en `lib/types.ts`.
+- **Internacionalización:** Uso de `useTranslations` de `next-intl`. Mensajes almacenados en `messages/*.json`.
 
 ## 📂 Key Project Structure
 
 - `app/`: Next.js App Router (Routes, Layouts).
-  - `admin/`: Administrative dashboard for properties and users.
-  - `property/`: Public property detail pages with dynamic slugs.
-- `components/`: Reusable UI components (Navbar, PropertyCard, PropertyForm, FilterModal, etc.).
-- `lib/`: Domain-specific logic, constants, and shared types (`types.ts`).
-- `messages/`: Translation files (en.json, es.json, fr.json).
-- `supabase/`: Local Supabase migrations and configuration.
-- `utils/`: Utility functions and Supabase client factory logic.
-- `proxy.ts`: Next.js 16 proxy implementation (auth sync).
+  - `admin/`: Panel de administración.
+  - `property/`: Páginas de detalle de propiedades.
+- `components/`: Componentes UI reutilizables.
+- `lib/`: Lógica de dominio, constantes y tipos compartidos (`types.ts`).
+- `messages/`: Archivos de traducción (en.json, es.json, fr.json).
+- `supabase/`: Migraciones y configuración local de Supabase.
+- `utils/`: Utilidades y factoría del cliente Supabase.
+- `proxy.ts`: Implementación del proxy de Next.js 16.
+
+## 🤖 Skills & Agent Capabilities
+
+Para optimizar el desarrollo, el agente tiene acceso a las siguientes habilidades. Usa `skill-router` para decidir cuál aplicar.
+
+### Infraestructura y Frontend
+- **`next-best-practices`**: Úsalo para optimizar el App Router, manejar APIs asíncronas y definir límites de RSC.
+- **`vercel-react-best-practices`**: Úsalo para eliminar "waterfalls" de datos y optimizar el rendimiento de carga.
+- **`typescript-advanced-types`**: Úsalo para implementar patrones complejos de tipado y genéricos robustos.
+
+### Base de Datos y Backend
+- **`supabase-postgres-best-practices`**: Úsalo para optimizar queries, diseñar esquemas y configurar RLS.
+- **`postgresql-optimization`**: Úsalo para análisis avanzado de rendimiento y optimización de índices.
+- **`sql-optimization`**: Úsalo para reescribir consultas lentas usando `EXPLAIN ANALYZE`.
+
+### UI/UX y Diseño
+- **`shadcn`**: Úsalo para implementar componentes de la librería shadcn/ui correctamente.
+- **`frontend-design`**: Úsalo para generar interfaces de alta calidad con tipografía y movimiento intencional.
+- **`web-design-reviewer`**: Úsalo para analizar y mejorar la accesibilidad y coherencia visual.
+- **`canvas-design`**: Úsalo para crear prototipos rápidos y mockups interactivos.
+- **`excalidraw-diagram-generator`**: Úsalo para visualizar arquitecturas y flujos de datos.
+
+### Metodología y Flujo de Trabajo
+- **`brainstorming`**: Úsalo para explorar ideas antes de implementar.
+- **`writing-plans`**: Úsalo para redactar planes técnicos detallados.
+- **`executing-plans`**: Úsalo para seguir especificaciones y validar planes de acción.
+- **`verification-before-completion`**: Úsalo para validar criterios de aceptación antes de finalizar.
+- **`systematic-debugging`**: Úsalo para diagnosticar errores de forma metódica.
+- **`subagent-driven-development`**: Úsalo para delegar tareas a sub-agentes expertos.
+
+### Git y Calidad
+- **`git-commit`** / **`conventional-commit`**: Úsalo para mantener un historial de commits claro y estandarizado.
+- **`git-flow-branch-creator`**: Úsalo para seguir la convención de ramas feature/hotfix.
+- **`refactor`**: Úsalo para mejorar la legibilidad del código sin cambiar su comportamiento.
+- **`test-driven-development`**: Úsalo para el ciclo Red-Green-Refactor.
+
+### Documentación
+- **`prd`**: Úsalo para generar documentos de requisitos de producto.
+- **`documentation-writer`**: Úsalo para redactar guías técnicas y documentación de API.
+- **`documentation-engineer`**: Úsalo para organizar sistemas complejos de conocimiento técnico.
+
+## 🔌 MCP Ecosystem
+
+El proyecto utiliza los siguientes servidores MCP para interactuar con herramientas externas:
+
+- **Supabase MCP**: Para gestión de base de datos, migraciones y ejecución de SQL.
+- **Context7 MCP**: Para validar el uso de librerías y consultar documentación actualizada en tiempo real.
 
 ## 📝 Current Progress & Roadmap
 

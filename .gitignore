@@ -28,6 +28,7 @@
 skills-lock.json
 .env
 .env*.local
+!.env.template
 
 # misc
 .DS_Store
