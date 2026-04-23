@@ -13,10 +13,7 @@ interface ImageUploadProps {
   maxFiles?: number;
 }
 
-/**
- * Premium Image Upload Component for LUXE ESTATE.
- * Uses shadcn for UI components and frontend-design principles for a polished feel.
- */
+
 export default function ImageUpload({ 
   onUploadComplete, 
   existingImages = [], 
