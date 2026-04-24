@@ -6,7 +6,7 @@ High-performance, responsive real estate platform built with **Next.js 16** and 
 
 ## 🌟 Overview
 
-Luxe Estate is a premium platform for real estate agencies, offering an immersive browsing experience for high-end properties. It combines cutting-edge web technologies with a sophisticated UI to serve both home seekers and agency administrators.
+Luxe Estate is a premium platform for real estate agencies, offering an immersive browsing experience for high-end properties. It combines cutting-edge web technologies with a sophisticated UI to serve both home seekers and agency administrators. s
 
 > [!IMPORTANT]
 > This project follows the **Feature Driven Development (FDD)** methodology and adheres to strict design guidelines for visual consistency.
