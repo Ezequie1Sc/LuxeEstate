@@ -2,6 +2,8 @@
 
 High-performance, responsive real estate platform built with **Next.js 16** and **React 19**, leveraging modern architectural patterns and a premium "Quiet Luxury" design aesthetic.
 
+ks
+
 **[🔗 Live Demo](https://javerage-luxe-estate.vercel.app)**
 
 ## 🌟 Overview
